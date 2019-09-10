@@ -68,13 +68,26 @@ compensation<-mutate(compensation, log(Root))
 # R for Data Science, Chapter 3
 # https://r4ds.had.co.nz/data-visualisation.html
 # Enter your code here
-
-
-
-
-
-
-
+ggplot(data=mpg) +
+  geom_point(mapping = aes(x=displ, y = hwy))
+ggplot(data = compensation) + 
+  geom_boxplot(mapping = aes(x= Animal, y=root))
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x=displ, y = hwy))
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x=hwy, y = cyl))
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x=displ, y = hwy))
+ggplot(data = mpg) +
+  geom_point(mapping = aes(x=displ, y = hwy, color = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
 
 
 
@@ -95,14 +108,22 @@ ggplot(ward)+
 
 # Load the sanchez.csv file
 # Enter your code here
-
+sanchez<-read_csv("datasets/demos/sanchez.csv")
 
 
 
 
 # Calculate summary statistics
 # Enter your code here
-
+summ_beetle_den <- sanchez %>%
+group_by(colony) %>%
+summarise(
+mean_beetle_den = mean(beetle_den),
+median_beetle_den = median(beetle_den),
+IQR_beetle_den = IQR(beetle_den),
+sd_beetle_den = sd(beetle_den),
+var_beetle_den = var(beetle_den)
+)
 
 
 
@@ -111,6 +132,7 @@ ggplot(ward)+
 # Add a new column of log(y+1) transformed beetle densities to the sanchez dataset
 # Enter your code here
 
+sanchez <- mutate(sanchez, log_beetle_den = log(beetle_den+1))
 
 
 
@@ -118,12 +140,29 @@ ggplot(ward)+
 # Generate histograms of beetle density by colony type before and after data 
 # transformation
 # Enter your code here
+ggplot(sanchez) +
+  geom_histogram(aes(beetle_den), binwidth = 2)+
+  facet_wrap(~colony)
+ggplot(sanchez) +
+  geom_histogram(aes(beetle_den), binwidth = 5)+
+  facet_wrap(~colony)
+ggplot(sanchez) +
+  geom_histogram(aes(beetle_den), binwidth = 7)+
+  facet_wrap(~colony)
+ggplot(sanchez) +
+  geom_histogram(aes(beetle_den), binwidth = 10)+
+  facet_wrap(~colony)
 
-
-
-
-
+ggplot(sanchez) +
+  geom_histogram(aes(log_beetle_den), binwidth = 5)+
+  facet_wrap(~colony)
+ggplot(sanchez) +
+  geom_histogram(aes(log_beetle_den), binwidth = 2)+
+  facet_wrap(~colony)
 # Plot boxplots of beetle density by colony type before and after data 
 # transformation
 # Enter your code here
-
+ggplot(sanchez)+
+  geom_boxplot(aes(x = colony, y = beetle_den), notch = TRUE, varwidth = TRUE)
+ggplot(sanchez)+
+  geom_boxplot(aes(x = colony, y = beetle_den), notch = FALSE, varwidth = FALSE)
