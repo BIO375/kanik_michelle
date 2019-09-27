@@ -59,7 +59,8 @@ survival_summ <- horn %>%
 
 # Compare the histograms and boxplots of horn and squareroot_eggs
 ggplot(horn) +
-  geom_histogram(aes(squamosalHornLength), binwidth = 1)
+  geom_histogram(aes(squamosalHornLength), binwidth = 1)+
+  facet_wrap(~Survival)
 
 ggplot(horn)+
   geom_boxplot(aes(x = Survival, y = squamosalHornLength))
