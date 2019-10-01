@@ -93,8 +93,8 @@ ggplot(data = mpg) +
 
 # Compare the histograms and boxplots of EGGS and squareroot_eggs
 ggplot(ward) +
-  geom_histogram(aes(EGGS), binwidth = 2)+
-  facet_wrap(~ZONE)
+  geom_histogram(aes(EGGS), binwidth = 2)
+
 ggplot(ward) +
   geom_histogram(aes(squareroot_eggs), binwidth = 0.5)+
   facet_wrap(~ZONE)

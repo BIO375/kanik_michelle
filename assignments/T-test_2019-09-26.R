@@ -9,7 +9,7 @@ library("tidyverse")
 tidyverse_update()
 library(readr)
 birth_diff_data <- read_csv("datasets/demos/birth_diff.csv")
-View(birth_diff)
+View(birth_diff_data)
 
 birth_summ <- birth_diff_data %>%
 summarise(
@@ -64,3 +64,4 @@ ggplot(horn) +
 
 ggplot(horn)+
   geom_boxplot(aes(x = Survival, y = squamosalHornLength))
+
