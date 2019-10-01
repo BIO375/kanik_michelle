@@ -171,3 +171,5 @@ ggplot(sanchez)+
   geom_boxplot(aes(x = colony, y = log_beetle_den), notch = TRUE, varwidth = TRUE)
 ggplot(sanchez)+
   geom_boxplot(aes(x = colony, y = log_beetle_den), notch = FALSE, varwidth = FALSE)
+
+### CODE RUNS CORRECTLY 10/10 ####
