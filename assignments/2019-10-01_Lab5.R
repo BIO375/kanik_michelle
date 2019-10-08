@@ -78,3 +78,73 @@ ggplot(HeartAttack_short)+
 
 # Two-sided
 t.test(cholest ~ group, data = HeartAttack_short, var.equal = TRUE, alternative = "two.sided", conf.level = 0.95)
+
+
+#Question 3
+# Clean up the working environment
+rm(list = ls())
+# Verify working directory, should be ~/Documents/Analyses/lastname_first
+getwd()
+
+# Load tidyverse
+library("tidyverse")
+# Check for updates
+tidyverse_update()
+
+# To perform sign tests, install and load the package DescTools
+#install.packages("DescTools")
+library("DescTools")
+
+#read in data
+furness<-read_csv("datasets/quinn/chpt3/furness.csv",col_names = TRUE,
+                            col_types = cols(
+                              SEX = col_character() )
+)
+
+# Look at the summary statistics
+summ_furness <- furness %>%
+  group_by(SEX) %>% 
+  summarise(mean_METRATE = mean(METRATE),
+            sd_METRATE = sd(METRATE),
+            n_METRATE = n())
+
+### Non-parametric Mann-Whitney U Test
+ggplot(furness) +
+  geom_histogram(aes(METRATE), binwidth = 200)+
+  facet_wrap(~SEX)
+
+ggplot(furness) +
+  geom_boxplot(aes(x = SEX, y = METRATE))
+
+ggplot(furness)+
+  geom_qq(aes(sample = METRATE, color = SEX))
+
+# Two-sided
+wilcox.test(METRATE ~ SEX, data = furness, alternative = "two.sided", conf.level = 0.95)
+
+# One-sided, HA that fed greater than starved
+wilcox.test(METRATE ~ SEX, data = furness, alternative = "greater", conf.level = 0.95)
+
+#question4
+
+# Clean up the working environment
+rm(list = ls())
+# Verify working directory, should be ~/Documents/Analyses/lastname_first
+getwd()
+
+# Load tidyverse
+library("tidyverse")
+# Check for updates
+tidyverse_update()
+
+# To perform sign tests, install and load the package DescTools
+#install.packages("DescTools")
+library("DescTools")
+
+#readindata
+elgar<-read_csv("datasets/quinn/chpt3/elgar.csv",col_names = TRUE,
+                  col_types = cols(
+                    PAIR = col_character() )
+)
+
+
