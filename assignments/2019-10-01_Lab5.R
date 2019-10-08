@@ -147,4 +147,13 @@ elgar<-read_csv("datasets/quinn/chpt3/elgar.csv",col_names = TRUE,
                     PAIR = col_character() )
 )
 
+# Two-sided
+t.test(elgar$VERTDIM, elgar$HORIZDIM, 
+       alternative = "two.sided", paired = TRUE, conf.level = 0.95)
+
+t.test(elgar$VERTLIGH, elgar$HORIZLIG, 
+       alternative = "two.sided", paired = TRUE, conf.level = 0.95)
+
+Tidy_elgar <- elgar %>%
+  gather(VERTDIM, HORIZDIM, key="treatment", value = "antibody")
 
