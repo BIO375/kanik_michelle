@@ -159,9 +159,28 @@ ZebraFinchBeaks <- read_csv("datasets/abd/chapter13/chap13q26ZebraFinchBeaks.csv
 
 # Choose Appropriate method and test whether females preferred one type of male over the other type
 
+# First step, calculate t_sample.  You will need to define what the sample mean, null hypothesis mean, sample 
+# standard deviation, and sample size are.  
+null_mean <- 0
 
+# Identify your response variable using the form dataset$variable_name
+y<-ZebraFinchBeaks$preference
 
+# Calculate summary statistics
+sample_mean <-mean(y)
+sample_sd <- sd(y)
+sample_n <- as.numeric(length(y))
+df <- sample_n -1
 
+# Whether you are given the values for mean/sd/n or calculate them, your next step is calculating t_sample
+t_sample <- (sample_mean - null_mean)/(sample_sd/sqrt(sample_n))
+
+# Two-sided
+t.test(ZebraFinchBeaks$preference, 
+       alternative = "two.sided", mu = 0, conf.level = 0.95)
+
+# since p value is less than p=0.05 we would reject the null hypothesis indicating 
+# females preferred one male over the other (t=5.6198, df=9, p-value= 0.0003259)
 
 
 # Review Problems 2- #16 #### 
@@ -181,9 +200,38 @@ tidyverse_update()
 library("DescTools")
 
 # read in data
+zebrafishspd <- read_csv("datasets/demos/zebrafishspd.csv")
+
+# I dont get this problem. I thought its paired bc of difference but I dont know anymore. 
+
+#mutate
+untidy_spd <- mutate(zebrafishspd, diff = Spd_mutant - wild_type)
+
+ggplot(untidy_spd) +
+  geom_histogram(aes(diff), binwidth = 10)
+
+ggplot(untidy_spd) +
+  geom_boxplot(aes(x = "", y = diff))
+
+ggplot(untidy_spd)+
+  geom_qq(aes(sample = diff))
+
+# Two-sided
+t.test(untidy_spd$Spd_mutant, untidy_spd$wild_type, 
+       alternative = "two.sided", paired = TRUE, conf.level = 0.95)
+
+#a- With these sata, estimate the magnitude of the effect of the mutation
+# (the difference between the means) on the amount of time spent in aggressive activty.
+# Put appropriate bounds on your estimate of the effect
 
 
 
+
+#b- what is the weight of evidence that this effect is not zero? Perform an 
+#appropriate statistical test of the difference. 
+
+# p value is greater than 0.05 we accept the null.(t- 19.962. df=9, p-value= 9.231e-09)
+#95 % CI interval: 68.7 86.3
 
 
 
