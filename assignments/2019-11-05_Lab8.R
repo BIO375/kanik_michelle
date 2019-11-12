@@ -139,11 +139,12 @@ anova(model01)
 summary(model01)
 
 # Unplanned comparisons
-# The key things you need to specify here are the model name and the factor name
 
+#tukey can be used to run to look at varying numbers of sporozoites
 tukey <- glht(model01, linfct = mcp(treatmentGroup = "Tukey"))
 summary(tukey)
 
+#scorpine-control and scorpine- WT have high significant differnce
 
 #### Problem 15-30 and/or 15-31 (same data in both problems) ####
 # Use the data to perform the correct test.  Please show code for all steps in your process.
@@ -160,3 +161,38 @@ crab <- read_csv("datasets/abd/chapter15/chap15q30FiddlerCrabFans.csv",
                  col_types = cols(crabType = col_factor(levels = c("female", 
                                                                    "intact male", "male minor removed", 
                                                                    "male major removed"))))
+
+crab <- slice(crab, -85)
+
+ggplot(crab, aes(x = crabType, y = bodyTemperature))+
+  geom_boxplot() +
+  theme_bw() +
+  coord_flip()
+
+ggplot(crab) +
+  geom_histogram(aes(bodyTemperature), binwidth = 1)+
+  facet_wrap(~crabType)
+
+ggplot(crab)+
+  geom_qq(aes(sample = bodyTemperature, color = crabType))
+
+# the plots follow normality
+
+model01 <- lm(bodyTemperature~crabType, data = crab)
+
+
+summ_body <- crab %>%
+  group_by(crabType) %>% 
+  summarise(mean_bodytemp = mean(bodyTemperature),
+            sd_bodytemp = sd(bodyTemperature),
+            n_bodytemp = n())
+ratio <-(max(summ_body$sd_bodytemp))/(min(summ_body$sd_bodytemp))
+
+
+#variances are equal 
+
+autoplot(model01)
+anova(model01)
+summary(model01)
+# mean rate of heat gain significantly differs among groups so we are rejecting null
+#( f=20.31, df: 3,80 p= 6.997e-10)
