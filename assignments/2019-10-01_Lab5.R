@@ -157,3 +157,4 @@ t.test(elgar$VERTLIGH, elgar$HORIZLIG,
 Tidy_elgar <- elgar %>%
   gather(VERTDIM, HORIZDIM, key="treatment", value = "antibody")
 
+### 10/10 Code runs without breaking ####

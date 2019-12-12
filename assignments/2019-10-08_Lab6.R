@@ -234,4 +234,5 @@ t.test(untidy_spd$Spd_mutant, untidy_spd$wild_type,
 #95 % CI interval: 68.7 86.3
 
 
-
+# Code runs without breaking, missing answer to 16a
+### 23/24 ###
