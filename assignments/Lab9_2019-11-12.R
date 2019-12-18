@@ -44,5 +44,5 @@ summary(model01)
 # under "estimate is where you get Bo/b1. So for this example 
 #b0 is Intercept as intercept
 # B1 is slope which is FERTILIZER
-
+#### 10/10 code runs without breaking ####
 

@@ -131,3 +131,4 @@ autoplot(model03)
 anova(model03)
 summary(model03)
 
+#### 10/10 code runs without breaking ####

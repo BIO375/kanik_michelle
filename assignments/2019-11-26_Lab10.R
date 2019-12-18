@@ -36,3 +36,4 @@ model01
 ### Chi-squared contingency analysis ####
 
 #by hand
+#### 10/10 code runs without breaking ####

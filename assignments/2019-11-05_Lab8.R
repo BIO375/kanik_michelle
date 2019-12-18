@@ -196,3 +196,5 @@ anova(model01)
 summary(model01)
 # mean rate of heat gain significantly differs among groups so we are rejecting null
 #( f=20.31, df: 3,80 p= 6.997e-10)
+
+#### 26/26 code runs without breaking ####
